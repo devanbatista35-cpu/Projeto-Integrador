@@ -1,0 +1,607 @@
+/* ==========================================================================
+   1. VARIÁVEIS DE TEMA E CORES (GUIA DE ESTILO DAS PRINTS)
+   ========================================================================== */
+
+/* Tema Claro (Light Mode) */
+:root[data-theme="light"] {
+    --bg-page: #d8d7cd;                   /* Fundo acinzentado claro */
+    --card-bg: rgba(47, 40, 40, 0.75);     /* Fundo do card principal (#2F2828) */
+    --card-border: #1a1a1a;               /* Borda do card */
+    --title-color: #FFF200;               /* Títulos em Amarelo #FFF200 */
+    --text-color: #FFFFFF;                /* Textos em Branco #FFFFFF */
+    --btn-bg: #807e56;                    /* Botões principais */
+    --btn-text: #FFFFFF;                  /* Texto do botão */
+    --btn-green: #2abb36;                 /* Botão Certo/Opção */
+    --btn-red: #d80000;                   /* Botão Errado/Opção */
+    --input-bg: rgba(0, 0, 0, 0.3);       /* Fundo do Input */
+    --input-border: #555;                 /* Borda do Input */
+    --progress-bg: #2F2828;              /* Fundo da barra de progresso */
+    --progress-fill: #FFF200;            /* Marcadores Amarelos */
+    --bg-image: url('../img/fundo.png');      /* Imagem de fundo do card */
+}
+
+/* Tema Escuro (Dark Mode) */
+:root[data-theme="dark"] {
+    --bg-page: #808080;                   /* Fundo da página */
+    --card-bg: #22252A;                   /* Quadro principal #22252A */
+    --card-border: #3B82F6;               /* Contorno azul #3B82F6 */
+    --title-color: #3B82F6;               /* Títulos em Azul #3B82F6 */
+    --text-color: #FFFFFF;                /* Letras Brancas #FFFFFF */
+    --btn-bg: #F4E918;                    /* Botões Amarelo Brilhante #F4E91B */
+    --btn-text: #000000;                  /* Texto preto do botão */
+    --btn-green: #2ABB36;                 /* Verde vibrante #2ABB36 */
+    --btn-red: #DA2F2F;                   /* Vermelho vibrante #DA2F2F */
+    --input-bg: #1e2227;                  /* Fundo dos campos */
+    --input-border: #3B82F6;              /* Borda dos campos */
+    --progress-bg: #2F2828;              /* Barra de tempo/progresso #2F2828 */
+    --progress-fill: #F4E918;            /* Marcador amarelo */
+    --bg-image: url('../img/escuro.png');      /* Imagem de fundo do card */
+
+}
+
+/* ==========================================================================
+   2. REGRAS GERAIS DE ESTRUTURA
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Instrument Sans', sans-serif;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+body {
+    background-image: var(--bg-image);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Opcional: mantém o fundo fixo ao rolar a página */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* 💡 Botão Lâmpada (Mantido exatamente como o seu original) */
+.theme-toggle-btn {
+    position: fixed;
+    top: 25px;
+    right: 35px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background: #d4d0b8;
+    box-shadow: 2px 4px 10px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    z-index: 100;
+}
+
+/* Botão de Controle de Música */
+.volume-container {
+    position: fixed;
+    top: 25px;
+    left: 35px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 100;
+}
+
+/* Botão de Controle de Música */
+.btn-controle {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background-color: #d4d0b8;
+    color: var(--btn-text);
+    box-shadow: 2px 4px 10px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    position: relative;
+    transition: transform 0.2s, background-color 0.3s;
+}
+
+.btn-controle::before {
+    content: "";
+    width: 0;
+    height: 0;
+    margin-left: 3px;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 12px solid currentColor;
+}
+
+.btn-controle.is-playing::before {
+    width: 12px;
+    height: 14px;
+    margin-left: 0;
+    border: 0;
+    background: linear-gradient(to right, currentColor 0 4px, transparent 4px 8px, currentColor 8px 12px);
+}
+
+.btn-controle.is-muted::before {
+    width: 16px;
+    height: 16px;
+    margin-left: 0;
+    border: 0;
+    background: currentColor;
+    clip-path: polygon(0 35%, 35% 35%, 75% 0, 75% 100%, 35% 65%, 0 65%);
+}
+
+.btn-controle.is-muted::after {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 20px;
+    border-radius: 2px;
+    background: currentColor;
+    transform: rotate(-45deg);
+}
+
+/* Barra de Volume Escondida por Padrão */
+.volume-slider {
+    width: 0;
+    opacity: 0;
+    transition: width 0.3s ease, opacity 0.3s ease;
+    cursor: pointer;
+    accent-color: var(--progress-fill); /* Usa a cor do seu tema na barra */
+}
+
+/* Mostra a barra de volume ao passar o mouse no container */
+.volume-container:hover .volume-slider {
+    width: 80px;
+    opacity: 1;
+}
+
+/* Estilo do Card Central */
+.card {
+    width: 360px;
+    min-height: 520px;
+    background-color: var(--card-bg);
+    border: 2px solid var(--card-border);
+    border-radius: 8px;
+    box-shadow: 12px 12px 0px rgba(0, 0, 0, 0.25);
+    padding: 25px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    text-align: center;
+    background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80');
+    background-size: cover;
+    background-position: center;
+}
+
+/* Controle de visibilidade das telas */
+.screen {
+    display: none;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
+.screen.active {
+    display: flex;
+}
+
+/* ==========================================================================
+   3. ELEMENTOS DE TEXTO E CAMPOS
+   ========================================================================== */
+.main-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--title-color);
+    margin-bottom: 10px;
+    margin-top: 20;
+    line-height: 1.1;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: var(--text-color);
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.footer-brand {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--title-color);
+    margin-top: 15px;
+}
+
+.quiz-footer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 32px;
+    margin-top: 15px;
+}
+
+.quiz-footer .footer-brand {
+    margin-top: 0;
+}
+
+.quiz-exit-btn {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transform: translateY(-50%);
+    transition: color 0.2s, background-color 0.2s;
+}
+
+.quiz-exit-btn:hover {
+    color: var(--title-color);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.quiz-exit-btn:focus-visible {
+    outline: 2px solid var(--title-color);
+    outline-offset: 2px;
+}
+
+.quiz-exit-icon {
+    position: relative;
+    display: block;
+    width: 20px;
+    height: 20px;
+}
+
+.exit-door {
+    position: absolute;
+    top: 3px;
+    left: 1px;
+    width: 9px;
+    height: 14px;
+    border: 1.5px solid currentColor;
+    border-right: 0;
+    border-radius: 2px 0 0 2px;
+}
+
+.exit-arrow {
+    position: absolute;
+    top: 9px;
+    left: 5px;
+    width: 12px;
+    height: 1.5px;
+    background: currentColor;
+}
+
+.exit-arrow::after {
+    position: absolute;
+    top: -3px;
+    right: 0;
+    width: 7px;
+    height: 7px;
+    border-top: 1.5px solid currentColor;
+    border-right: 1.5px solid currentColor;
+    content: "";
+    transform: rotate(45deg);
+}
+
+.exit-confirm-dialog {
+    position: fixed;
+    top: 50vh;
+    left: 50vw;
+    margin: 0;
+    transform: translate(-50%, -50%);
+    width: min(360px, calc(100vw - 32px));
+    max-height: calc(100vh - 32px);
+    overflow: auto;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    background: var(--card-bg);
+    color: var(--text-color);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+}
+
+.exit-confirm-dialog[open] {
+    animation: exit-dialog-enter 180ms ease-out;
+}
+
+.exit-confirm-dialog::backdrop {
+    background: rgba(10, 12, 14, 0.72);
+    backdrop-filter: blur(3px);
+}
+
+.exit-confirm-content {
+    padding: 24px;
+    text-align: left;
+}
+
+.exit-dialog-mark {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    margin-bottom: 16px;
+    border-radius: 50%;
+    background: rgba(216, 0, 0, 0.16);
+    color: var(--btn-red);
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.exit-confirm-content h2 {
+    margin: 0 0 8px;
+    color: var(--title-color);
+    font-size: 20px;
+}
+
+.exit-confirm-content p {
+    margin: 0 0 22px;
+    color: var(--text-color);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.exit-dialog-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.exit-dialog-actions button {
+    min-height: 40px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.exit-dialog-stay {
+    flex: 1;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: transparent;
+    color: var(--text-color);
+}
+
+.exit-dialog-confirm {
+    flex: 1;
+    border: 1px solid var(--btn-red);
+    background: var(--btn-red);
+    color: #fff;
+}
+
+.exit-dialog-actions button:focus-visible {
+    outline: 2px solid var(--title-color);
+    outline-offset: 2px;
+}
+
+.exit-dialog-actions button:hover {
+    filter: brightness(1.12);
+}
+
+@keyframes exit-dialog-enter {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -47%) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .exit-confirm-dialog[open] {
+        animation: none;
+    }
+}
+
+/* Campos de entrada (Cadastro) */
+.input-group {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 12px;
+}
+
+.input-group label {
+    display: block;
+    color: var(--text-color);
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid var(--input-border);
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    outline: none;
+    font-size: 13px;
+}
+
+/* Botões */
+.btn-container {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.btn {
+    background-color: var(--btn-bg);
+    color: var(--btn-text);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    min-width: 153px;
+    box-shadow: 0px 3px 6px rgba(0,0,0,0.3);
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.btn-green { background-color: var(--btn-green); color: #fff; }
+.btn-red { background-color: var(--btn-red); color: #fff; }
+
+/* Lista de Regras */
+.rules-list {
+    text-align: left;
+    color: var(--text-color);
+    font-size: 14px;
+    line-height: 1.8;
+    margin: 50px 0;
+    list-style: none;
+}
+
+.rules-list li::before {
+    content: "• ";
+    color: var(--title-color);
+    font-weight: bold;
+}
+
+/* ==========================================================================
+   4. MARCADORES DO QUIZ & FEEDBACK
+   ========================================================================== */
+.quiz-header {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.quiz-status {
+    color: var(--title-color);
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.dots-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    background: var(--progress-bg);
+    padding: 6px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #000;
+}
+
+.dot.active {
+    background-color: var(--progress-fill);
+}
+
+.score-badge {
+    background-color: var(--progress-fill);
+    color: #000;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.question-text {
+    color: var(--text-color);
+    font-size: 16px;
+    font-weight: 600;
+    margin: 15px 0;
+    line-height: 1.3;
+}
+
+/* Quadro de Feedback (Acerto / Erro) */
+.feedback-box {
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--btn-red);
+    padding: 10px;
+    border-radius: 6px;
+    margin: 10px 0;
+    height: 120px;
+    width: 100%;
+}
+
+.feedback-box.correct {
+    border-color: var(--btn-green);
+}
+
+.feedback-title {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.feedback-title.correct { color: var(--btn-green); }
+.feedback-title.incorrect { color: var(--btn-red); }
+
+.feedback-desc {
+    color: var(--text-color);
+    font-size: 13px;
+    line-height: 1.3;
+}
+
+/* Estatísticas e Rankings */
+.stats-list {
+    width: 100%;
+    color: var(--text-color);
+    font-size: 13px;
+    text-align: left;
+    margin: 15px 0;
+}
+
+.stats-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px dashed rgba(255,255,255,0.2);
+}
+
+@keyframes pulsar-volume {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(244, 233, 24, 0.4); /* Altera dinamicamente com base na cor se preferir */
+    }
+    50% {
+        transform: scale(1.08);
+        box-shadow: 0 0 0 10px rgba(244, 233, 24, 0);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(244, 233, 24, 0);
+    }
+}

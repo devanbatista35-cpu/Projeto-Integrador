@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Bug or Fact - Quiz</title>
+    
+    <!-- Importação da fonte Instrument Sans (Guia de Estilo) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Vinculação do arquivo de estilos CSS externo -->
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+
+    <!-- Botão de alternância entre Tema Claro e Escuro (Lâmpada) -->
+    <button class="theme-toggle-btn" id="themeToggleBtn" title="Alternar Tema">💡</button>
+
+    <div class="volume-container">
+    <button id="btn-musica" class="btn-controle" type="button" aria-label="Tocar música" title="Tocar música"></button>
+    
+    <input type="range" id="volume-control" class="volume-slider" min="0" max="1" step="0.05" value="0.5">
+    </div>
+
+
+    <!-- CARD PRINCIPAL DO QUIZ -->
+    <div class="card">
+        
+        <!-- ==========================================================================
+             TELA 1: CADASTRO / LOGIN
+             ========================================================================== -->
+        <div class="screen active" id="screen-register">
+            <div>
+                <h1 class="main-title">Bug<br>or<br> Fact</h1>
+            </div>
+
+            <form id="form-register" style="width: 100%;">
+                <div class="input-group">
+                    <label for="username">Nome</label>
+                    <input type="text" id="username" placeholder="Ex: Luiz Miguel" required>
+                </div>
+                <div class="input-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" placeholder="Ex: luizmiguel@gmail.com" required>
+                </div>
+                <div class="btn-container">
+                    <button type="submit" class="btn">Entrar</button>
+                </div>
+            </form>
+
+            <div class="footer-brand">Bug or Fact</div>
+        </div>
+
+        <!-- ==========================================================================
+             TELA 2: REGRAS DO JOGO
+             ========================================================================== -->
+        <div class="screen" id="screen-rules">
+            <div>
+                <h1 class="main-title">Bem-Vindo(a)</h1>
+                <p class="subtitle">Esse é o Bug or Fact</p>
+                
+                <h3 style="color: var(--text-color); font-size: 14px; margin-top: 10px;">Como Jogar</h3>
+                <ul class="rules-list">
+                    <li>Este é um jogo de Verdadeiro ou Falso</li>
+                    <li>Cada resposta correta vale 10 pontos.</li>
+                    <li>Tente obter a maior pontuação possível.</li>
+                    <li>Todas as perguntas são sobre Tecnologia</li>
+                </ul>
+            </div>
+
+            <div class="btn-container">
+                <button class="btn" onclick="startGame()">Jogar</button>
+                <button class="btn" onclick="navigateTo('screen-register')">Sair</button>
+            </div>
+
+            <div class="footer-brand">Bug or Fact</div>
+        </div>
+
+        <!-- ==========================================================================
+             TELA 3: PERGUNTAS / QUIZ
+             ========================================================================== -->
+        <div class="screen" id="screen-quiz">
+            <div class="quiz-header">
+                <div class="quiz-status" id="quiz-question-number">Pergunta 1 de 10</div>
+                <!-- Indicador de progresso com bolinhas -->
+                <div class="dots-container" id="dots-container"></div>
+                <div class="score-badge" id="quiz-score-badge">Pontuação atual: 0 pontos</div>
+            </div>
+
+            <div>
+                <p class="question-text" id="question-text">A linguagem C, é uma linguagem compilada?</p>
+            </div>
+
+            <!-- Botões de Opção Certo e Errado -->
+            <div class="btn-container" id="quiz-options">
+                <button class="btn btn-green" onclick="answerQuestion(true)">Certo</button>
+                <button class="btn btn-red" onclick="answerQuestion(false)">Errado</button>
+            </div>
+
+            <!-- Bloco de Feedback (Mostrado após responder) -->
+            <div id="feedback-container" style="display: none; width: 100%;">
+                <div class="feedback-box" id="feedback-box">
+                    <div class="feedback-title" id="feedback-title">RESPOSTA CORRETA</div>
+                    <div class="feedback-desc" id="feedback-desc">
+                        Explicação da resposta selecionada...
+                    </div>
+                </div>
+                <button class="btn" style="width: 100%;" onclick="nextQuestion()">Próxima Pergunta</button>
+            </div>
+
+            <div class="quiz-footer">
+                <div class="footer-brand">Bug or Fact</div>
+                <button class="quiz-exit-btn" type="button" onclick="exitGame()" aria-label="Sair da partida" title="Sair da partida">
+                    <span class="quiz-exit-icon" aria-hidden="true">
+                        <span class="exit-door"></span>
+                        <span class="exit-arrow"></span>
+                    </span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ==========================================================================
+             TELA 4: FIM DE JOGO
+             ========================================================================== -->
+        <div class="screen" id="screen-gameover">
+            <h1 class="main-title">Fim de Jogo</h1>
+
+            <div class="stats-list">
+                <div class="stats-item">
+                    <span>Pontuação final</span>
+                    <strong id="final-score">0 pontos.</strong>
+                </div>
+                <div class="stats-item">
+                    <span>Perguntas Corretas</span>
+                    <strong id="final-correct">0 perguntas</strong>
+                </div>
+                <div class="stats-item">
+                    <span>Perguntas Incorretas</span>
+                    <strong id="final-incorrect">0 perguntas</strong>
+                </div>
+                <div class="stats-item">
+                    <span>Total de Perguntas</span>
+                    <strong>10 perguntas</strong>
+                </div>
+            </div>
+
+            <div class="btn-container">
+                <button class="btn" style="width: 100%;" onclick="startGame()">Jogar novamente</button>
+                <button class="btn" onclick="navigateTo('screen-ranking')">Ranking</button>
+                <button class="btn" onclick="navigateTo('screen-register')">Sair</button>
+            </div>
+
+            <div class="footer-brand">Bug or Fact</div>
+        </div>
+
+        <!-- ==========================================================================
+             TELA 5: RANKING
+             ========================================================================== -->
+        <div class="screen" id="screen-ranking">
+            <h1 class="main-title">Ranking</h1>
+
+            <div class="stats-list" id="ranking-list"></div>
+
+            <div class="btn-container">
+                <button class="btn" style="width: 100%;" onclick="startGame()">Jogar novamente</button>
+                <button class="btn" onclick="navigateTo('screen-about')">Sobre</button>
+                <button class="btn" onclick="navigateTo('screen-register')">Sair</button>
+            </div>
+
+            <div class="footer-brand">Bug or Fact</div>
+        </div>
+
+        <!-- ==========================================================================
+             TELA 6: SOBRE E REFERÊNCIAS
+             ========================================================================== -->
+        <div class="screen" id="screen-about">
+            <h1 class="main-title" id="about-title">Sobre</h1>
+
+            <p class="subtitle" id="about-content" style="font-size: 11px; line-height: 1.5; font-weight: 400;">
+                Esse jogo foi desenvolvido juntando conhecimentos técnicos sobre HTML, JavaScript e Banco de Dados.<br><br>
+                Projeto integrador da Graduação em Ciência da computação, no ano de 2026.<br><br>
+                <strong>Desenvolvedores<br>
+                Gustavo Sacomani Rafael<br>
+                Vanessa Vieira dos Santos<br>
+                João Pedro Camargo de Souza<br>
+                Pamela Nunes de Campos<br>
+                Henrique de Oliveira Granso<br>
+                Mykaelly Pryscylly Rodrigues de Paulo</strong>
+            </p>
+
+            <div class="btn-container">
+                <button class="btn" style="width: 100%;" onclick="startGame()">Jogar novamente</button>
+                <button class="btn" id="btn-toggle-ref" onclick="toggleReferences()">Referências</button>
+                <button class="btn" onclick="navigateTo('screen-register')">Sair</button>
+            </div>
+
+            <div class="footer-brand">Bug or Fact</div>
+        </div>
+
+    </div>
+
+    <dialog id="exit-confirm-dialog" class="exit-confirm-dialog" aria-labelledby="exit-dialog-title" aria-describedby="exit-dialog-message">
+        <div class="exit-confirm-content">
+            <div class="exit-dialog-mark" aria-hidden="true">!</div>
+            <h2 id="exit-dialog-title">Sair da partida?</h2>
+            <p id="exit-dialog-message">Seu progresso e a pontuação desta partida serão perdidos.</p>
+            <div class="exit-dialog-actions">
+                <button id="stay-in-game" type="button" class="exit-dialog-stay" onclick="closeExitDialog()">Continuar jogando</button>
+                <button type="button" class="exit-dialog-confirm" onclick="confirmExitGame()">Sair da partida</button>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- Vinculação de arquivo de audio -->
+    <audio id="musica-site" src="audios/codandoOriginal.mp3" preload="auto" loop></audio>
+
+    <!-- Vinculação do arquivo de lógica JavaScript externo -->
+    <script src="script.js"></script>
+</body>
+</html>
