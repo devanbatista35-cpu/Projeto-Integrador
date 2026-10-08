@@ -2,7 +2,7 @@
 É um DER na notação de Chen, no brModelo ou no Visual Paradigm Online. Entidades, atributos, relacionamentos e cardinalidades. Ainda não aparecem tabela, chave estrangeira nem tipo de coluna: isso é o modelo lógico, no passo 5.
 
 ## Entidades
-
+| --- | --- | --- |
 | Entidade       |                Atributos                |        Identificador      |
 | Categoria      | id, id_numeracao, nome                  |            id             |
 | Pergunta       | id,pergunta,enunciado                   |            id             |
@@ -14,7 +14,7 @@
 
 
 ## Relacionamentos
-
+| --- | --- | --- | --- |
 Uma frase por linha, ligada a um requisito. Cardinalidade dos dois lados, mínimo e máximo.
 
 |         Relacionamento             |           Cardinalidade               |                                              Justificativa                                                                   |       Requisito     |
