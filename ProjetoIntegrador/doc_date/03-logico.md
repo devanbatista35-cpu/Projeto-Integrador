@@ -52,3 +52,7 @@ Repitam o bloco para cada tabela. A descrição diz o que a coluna guarda, em um
 | id_item_a | INT | NOT NULL | PK / FK -> tabela_a.id | Parte da chave composta; referência à Tabela A. |
 | id_item_b | INT | NOT NULL | PK / FK -> tabela_b.id | Parte da chave composta; referência à Tabela B. |
 | quantidade | INT | NOT NULL | DEFAULT 1 | Quantidade de itens associados na relação. |
+
+### imagem modelo ligico
+
+![alt text](<modelo_logico_quiz.png>)
