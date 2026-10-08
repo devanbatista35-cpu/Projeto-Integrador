@@ -26,6 +26,7 @@ Uma frase por linha, ligada a um requisito. Cardinalidade dos dois lados, mínim
 | Pergunta referencia Biblioteca | Pergunta (0,N) - Biblioteca (1,1) | Uma pergunta pode citar varias fontes, ou nenhuma. Cada fonte registrada pertence somente a auma pergunta | RD__ |
 | Jogador obtem Classificação | Jogador (0,N) - Classificação (1,1) | Um jogador pode ter várias pontuações( uma por partida), ou nenhuma se ainda não jogou. Cada pontuação é de um unico jogador | RD__ |
 
+## Imagem
 
 
 ![alt text](<merConceitual.png>)
