@@ -1,7 +1,4 @@
 # Passo 4 — Modelo conceitual
-
-Marco M1. A entrega deste passo é o modelo conceitual: o desenho em `entregas/02-conceitual.pdf` (ou `.png`) e as tabelas abaixo.
-
 É um DER na notação de Chen, no brModelo ou no Visual Paradigm Online. Entidades, atributos, relacionamentos e cardinalidades. Ainda não aparecem tabela, chave estrangeira nem tipo de coluna: isso é o modelo lógico, no passo 5.
 
 ## Entidades
@@ -32,4 +29,4 @@ O diagrama e esta tabela descrevem o mesmo modelo. Toda entidade do desenho est�
 
 
 
-![alt text](<Captura de tela 2026-10-08 092600.png>)
+![alt text](<merConceitual.png>)
