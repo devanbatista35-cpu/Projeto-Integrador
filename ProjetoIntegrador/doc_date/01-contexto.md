@@ -37,7 +37,6 @@ Durante a partida, o sistema deve registrar a pontuação do jogador — somando
 | RF02 | Executar um partida: o sistema de dar a opção de iniciar o jogo. | funcional |
 | RF03 | Escolher uma alternativa: o usuario deve escolher uma alternativa, para que a outra seja libera e respondida | funcional |
 | RF04 | Sair do  jogo: ao fim da partida, sair do jogo | funcional |
-
 | RN01 | Cadastro de Jogador: o sistema deve solicitar o Nome e o E-mail do usuário antes do início do jogo. | regra de negocio |
 | RN02 | Apresentação das Regras: o sistema deve exibir as instruções do jogo, informando que a temática é Tecnologia e que cada acerto vale 10 pontos. | regra de negócio |
 | RN03 | Apresentação das Perguntas: o sistema deve exibir sequencialmente 10 perguntas no formato "Certo" (Verdadeiro) ou "Errado" (Falso). | regra de negócio |
@@ -47,7 +46,6 @@ Durante a partida, o sistema deve registrar a pontuação do jogador — somando
 | RN07 | Feedback: após responder uma questão, o sistema deve bloquear os botões de resposta, mostrar se o usuário acertou ou errou e fornecer uma explicação sobre o assunto antes de permitir o avanço para a próxima pergunta. | regra de negocio |
 | RN08 | Estatísticas: ao término das 10 perguntas, o sistema deve apresentar a pontuação final e o quantitativo de perguntas corretas e incorretas. | regra de negocio |
 | RN09 | Ranking: o sistema deve permitir a visualização da tabela de pontuação com os melhores desempenhos dos jogadores. | regra de negocio |
-
 | RNF01 | Usabilidade e Interface: a interface deve ser amigável, estilizada com a fonte Instrument Sans e paleta de cores customizada com variáveis CSS. | não funcional |
 | RNF02 | Compatibilidade e Padrões Web: aplicação desenvolvida com padrões semânticos de HTML5, estilização moderna com CSS3 e manipulação do DOM nativa via JavaScript (ES6+). | não funcional |
 | RNF03 | Desempenho e Execução Local: a aplicação e os motores de JS devem executar nativamente no navegador (client-side), sem dependências complexas de bibliotecas externas. | não funcional |
