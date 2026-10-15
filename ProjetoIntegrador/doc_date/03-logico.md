@@ -55,4 +55,4 @@ Repitam o bloco para cada tabela. A descrição diz o que a coluna guarda, em um
 
 ### imagem modelo ligico
 
-![alt text](<modelo_logico_quiz.png>)
+![alt text](<modeloLogico.jpeg>)
