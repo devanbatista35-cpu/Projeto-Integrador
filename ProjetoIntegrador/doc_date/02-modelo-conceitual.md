@@ -6,13 +6,13 @@
 
 | Entidade | Atributos | Identificador |
 | --- | --- | --- |
-| Categoria | id, id_numeracao, nome | id |
-| Pergunta | id, pergunta, enunciado | id |
-| Alternativa | id, texto_alternativo, eh_correta | id |
-| Publicacao | id, data_publicacao, status_publicacao | id |
-| Bibliografia | id, titulo_fonte, link_url | id |
-| Jogador | id, nome_jogador, email_jogador | id(email_jogador é unico) |
-| Classificacao | id, pontuacao, data_jogo | id |
+| Categoria | codigo_categorias, id_numeracao, nome | codigo_categorias |
+| Pergunta | codigo_perguntas, id_Categoria, enunciado | codigo_perguntas |
+| Alternativa | codigo_alternativas, id_pergunta, texto_alternativo, eh_correta | codigo_alternativa |
+| Publicacao | codigo_publicacoes, id_pergunta, data_publicacao, status_publicacao | codigo_publicacoes |
+| Bibliografia | codigo_bibliografia, id_pergunta, titulo_fonte, link_url | codigo_bibliografia |
+| Jogador | codigo_jogador, nome, email_jogador | codigo_jogador |
+| Classificacao | codigo_classficacao, id_codigo_jogadorfk, pontuacao, data_jogo | codigo_classificacao |
 
 ## Relacionamentos
 
@@ -24,9 +24,10 @@ Uma frase por linha, ligada a um requisito. Cardinalidade dos dois lados, mínim
 | Pergunta tem Alternativa | Pergunta (1,N) - Alternativa (1,1) | Toda pergunta precisa de ao menos uma alternativa. Cada alternativa pertence a uma unica pergunta | RD__ |
 | Pergunta é publicada em Publicação | Pergunta (0,N) - Publicação (1,1) | Uma pergunta pode nunca ter sido publicada ou ter varias publicações. Cada publicação refere-se a uma unica pergunta | RD__ |
 | Pergunta referencia Biblioteca | Pergunta (0,N) - Biblioteca (1,1) | Uma pergunta pode citar varias fontes, ou nenhuma. Cada fonte registrada pertence somente a auma pergunta | RD__ |
+| Classificação é gerada por Pergunta | Pergunta (1,N) - Classificação (1,n) | A cada pergunta o jogador acumula ou não os pontos. Cada pontuação é de um unico jogador | RD__ |
 | Jogador obtem Classificação | Jogador (0,N) - Classificação (1,1) | Um jogador pode ter várias pontuações( uma por partida), ou nenhuma se ainda não jogou. Cada pontuação é de um unico jogador | RD__ |
 
 ## Imagem
 
 
-![alt text](<merConceitual.png>)
+![alt text](<modeloConceitual.jpeg>)
