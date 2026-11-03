@@ -1,18 +1,18 @@
 # Passo 4 — Modelo conceitual
 
-É um DER na notação de Chen, no brModelo ou no Visual Paradigm Online. Entidades, atributos, relacionamentos e cardinalidades. Ainda não aparecem tabela, chave estrangeira nem tipo de coluna: isso é o modelo lógico, no passo 5.
+É um DER na notação de Chen, no brModelo ou no Visual Paradigm Online. Entidades, atributos, relacionamentos e cardinalidades. Ainda não aparecem chaves estrangeiras nem tipos de colunas do modelo físico: isso pertence ao modelo lógico (passo 5).
 
 ## Entidades
 
 | Entidade | Atributos | Identificador |
 | --- | --- | --- |
 | Categoria | codigo_categorias, id_numeracao, nome | codigo_categorias |
-| Pergunta | codigo_perguntas, id_Categoria, enunciado | codigo_perguntas |
-| Alternativa | codigo_alternativas, id_pergunta, texto_alternativo, eh_correta | codigo_alternativa |
+| Pergunta | codigo_perguntas, id_categoria, pergunta, enunciado | codigo_perguntas |
+| Alternativa | codigo_alternativas, id_pergunta, texto_alternativa, eh_correta | codigo_alternativas |
 | Publicacao | codigo_publicacoes, id_pergunta, data_publicacao, status_publicacao | codigo_publicacoes |
-| Bibliografia | codigo_bibliografia, id_pergunta, titulo_fonte, link_url | codigo_bibliografia |
-| Jogador | codigo_jogador, nome, email_jogador | codigo_jogador |
-| Classificacao | codigo_classficacao, id_codigo_jogadorfk, pontuacao, data_jogo | codigo_classificacao |
+| Bibliografia | codigo_bibliografias, id_pergunta, titulo_fonte, link_url | codigo_bibliografias |
+| Jogador | codigo_jogador, nome, email, data_cadastro | codigo_jogador |
+| Classificacao | id_codigo_jogadorfk, id_pergunta, pontuacao, data_atualizacao | id_codigo_jogadorfk |
 
 ## Relacionamentos
 
@@ -20,14 +20,13 @@ Uma frase por linha, ligada a um requisito. Cardinalidade dos dois lados, mínim
 
 | Relacionamento | Cardinalidade | Justificativa | Requisito |
 | --- | --- | --- | --- |
-| Categoria possui Pergunta | Categoria (0,N) - Pergunta (1,1) | Uma categoria tem varias perguntas, ou nenhuma ainda. E cada pergunta pertence a exatamente uma categoria | RD__ |
-| Pergunta tem Alternativa | Pergunta (1,N) - Alternativa (1,1) | Toda pergunta precisa de ao menos uma alternativa. Cada alternativa pertence a uma unica pergunta | RD__ |
-| Pergunta é publicada em Publicação | Pergunta (0,N) - Publicação (1,1) | Uma pergunta pode nunca ter sido publicada ou ter varias publicações. Cada publicação refere-se a uma unica pergunta | RD__ |
-| Pergunta referencia Biblioteca | Pergunta (0,N) - Biblioteca (1,1) | Uma pergunta pode citar varias fontes, ou nenhuma. Cada fonte registrada pertence somente a auma pergunta | RD__ |
-| Classificação é gerada por Pergunta | Pergunta (1,N) - Classificação (1,n) | A cada pergunta o jogador acumula ou não os pontos. Cada pontuação é de um unico jogador | RD__ |
-| Jogador obtem Classificação | Jogador (0,N) - Classificação (1,1) | Um jogador pode ter várias pontuações( uma por partida), ou nenhuma se ainda não jogou. Cada pontuação é de um unico jogador | RD__ |
+| Categoria possui Pergunta | Categoria (1,1) — (0,N) Pergunta | Uma categoria pode ter várias perguntas associadas (ou nenhuma), e cada pergunta pertence a exatamente uma categoria (via `id_numeracao` / `id_categoria`). | RD01 |
+| Pergunta tem Alternativa | Pergunta (1,1) — (1,N) Alternativa | Toda pergunta possui alternativas associadas (ex: TRUE e FALSE), e cada alternativa pertence a uma única pergunta. | RD02 |
+| Pergunta publicada em Publicacao | Pergunta (1,1) — (0,N) Publicacao | Uma pergunta pode ter um ou mais registros de publicação de histórico, e cada registro de publicação diz respeito a apenas uma pergunta. | RD03 |
+| Pergunta referencia Bibliografia | Pergunta (1,1) — (0,N) Bibliografia | Uma pergunta pode referenciar zero ou mais fontes bibliográficas (links/citações), e cada registro de bibliografia é associado a apenas uma pergunta. | RD04 |
+| Pergunta gerado_por Classificacao | Pergunta (0,1) — (0,N) Classificacao | Uma pontuação no ranking pode estar opcionalmente vinculada à última pergunta respondida (`id_pergunta` aceita NULL com `ON DELETE SET NULL`), enquanto uma pergunta pode ser vinculada a várias pontuações. | RD05 |
+| Jogador obtém Classificacao | Jogador (1,1) — (0,1) Classificacao | Cada jogador possui no máximo uma entrada única no ranking geral (relacionamento 1:1 via chave compartilhada `id_codigo_jogadorfk`), e toda pontuação registrada pertence obrigatoriamente a um jogador. | RD06 |
 
 ## Imagem
 
-
-![alt text](<modeloConceitual.jpeg>)
+![Modelo Conceitual](mer_conceitual.png)
