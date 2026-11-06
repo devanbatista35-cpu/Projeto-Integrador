@@ -4,7 +4,7 @@
 // Endereço da API (server.js). Se o front for servido pelo mesmo servidor, use '/api'.
 const API_URL = ['localhost', '127.0.0.1'].includes(location.hostname)
     ? 'http://localhost:3000/api'
-    : 'https://bug-or-fact-api.onrender.com';
+    : 'https://bug-or-fact-api.onrender.com/api';
 
 const QUESTIONS_PER_GAME = 10;
 
