@@ -1,0 +1,17 @@
+{
+  "name": "bug-or-fact-api",
+  "version": "1.0.0",
+  "description": "API REST do quiz Bug or Fact (Node.js + Express + PostgreSQL)",
+  "main": "js/server.js",
+  "scripts": {
+    "start": "node js/server.js",
+    "dev": "node --watch js/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "pg": "^8.12.0"
+  },
+  "engines": { "node": ">=18" }
+}
