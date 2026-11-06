@@ -306,8 +306,8 @@ Ambos os serviços fazem **deploy contínuo**: cada `push` na branch `main` publ
 
 Projeto desenvolvido por estudantes de Ciência da Computação:
 
-- Gustavo Sacomani Rafael
 - Vanessa Batista de Freitas
+- Gustavo Sacomani Rafael
 - João Pedro Camargo de Souza
 - Pamela Nunes de Campos
 - Henrique de Oliveira Granso
