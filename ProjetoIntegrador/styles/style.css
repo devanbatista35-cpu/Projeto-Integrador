@@ -595,8 +595,6 @@ body {
 }
 
 .feedback-curiosidade {
-  margin: 10px 0;
-  padding: 8px 10px;
   background: rgba(255, 221, 0, 0.1);
   border-left: 3px solid #ffdd00;
   border-radius: 6px;

@@ -130,7 +130,7 @@ function loadQuestion() {
 // Monta o texto de feedback: resposta certa + curiosidade + fonte (bibliografia) se existir
 function renderFeedbackDescription(q) {
     const feedbackDesc = document.getElementById('feedback-desc');
-    feedbackDesc.textContent = `A resposta correta é: ${q.correct ? 'Verdadeiro' : 'Falso'}.`;
+    //feedbackDesc.textContent = `A resposta correta é: ${q.correct ? 'Verdadeiro' : 'Falso'}.`;
 
     if (q.explanation) {
         feedbackDesc.textContent += ` ${q.explanation}`;
