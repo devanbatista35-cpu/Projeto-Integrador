@@ -159,7 +159,7 @@ body {
 }
 
 .btn-controle.is-playing::after {
-    opacity: 0.35;
+    opacity: none;
 }
 
 .btn-controle.is-muted::before {
