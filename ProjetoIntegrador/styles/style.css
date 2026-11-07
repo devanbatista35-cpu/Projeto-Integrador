@@ -594,6 +594,16 @@ body {
     line-height: 1.3;
 }
 
+.feedback-curiosidade {
+  margin: 10px 0;
+  padding: 8px 10px;
+  background: rgba(255, 221, 0, 0.1);
+  border-left: 3px solid #ffdd00;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
 /* Estatísticas e Rankings */
 .stats-list {
     width: 100%;

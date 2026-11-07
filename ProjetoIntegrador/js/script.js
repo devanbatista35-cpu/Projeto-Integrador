@@ -127,12 +127,25 @@ function loadQuestion() {
 }
 
 // Monta o texto de feedback: resposta certa + fonte (bibliografia) se existir
+// Monta o texto de feedback: resposta certa + curiosidade + fonte (bibliografia) se existir
 function renderFeedbackDescription(q) {
     const feedbackDesc = document.getElementById('feedback-desc');
     feedbackDesc.textContent = `A resposta correta é: ${q.correct ? 'Verdadeiro' : 'Falso'}.`;
 
     if (q.explanation) {
         feedbackDesc.textContent += ` ${q.explanation}`;
+    }
+
+    if (q.curiosity) {
+        const box = document.createElement('div');
+        box.className = 'feedback-curiosidade';
+
+        const strong = document.createElement('strong');
+        strong.textContent = '💡 Curiosidade: ';
+        box.appendChild(strong);
+        box.appendChild(document.createTextNode(q.curiosity));
+
+        feedbackDesc.appendChild(box);
     }
 
     if (q.source_title) {

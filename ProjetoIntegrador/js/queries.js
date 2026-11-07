@@ -6,12 +6,13 @@ async function buscarPerguntas(limite) {
             p.enunciado        AS statement,
             (a.texto_alternativa = 'TRUE') AS correct,
             b.titulo_fonte     AS source_title,
-            b.link_url         AS source_url
+            b.link_url         AS source_url,
+            b.curiosidade      AS curiosity
        FROM Perguntas p
        JOIN Alternativas a
          ON a.id_pergunta = p.codigo_perguntas AND a.eh_correta = TRUE
        LEFT JOIN LATERAL (
-              SELECT titulo_fonte, link_url
+              SELECT titulo_fonte, link_url, curiosidade
                 FROM Bibliografias
                WHERE id_pergunta = p.codigo_perguntas
                ORDER BY codigo_bibliografias
