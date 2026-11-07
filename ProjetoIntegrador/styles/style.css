@@ -110,8 +110,10 @@ body {
 .btn-controle {
     width: 45px;
     height: 45px;
+    padding: 0;
     border-radius: 50%;
     border: none;
+    outline: none;
     cursor: pointer;
     background-color: #d4d0b8;
     color: rgba(35, 35, 35, 0.8);
@@ -119,18 +121,22 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
+    font-size: 0; /* esconde qualquer emoji/texto que sobrar no botão */
     position: relative;
-    transition: transform 0.2s, background-color 0.3s;
+    -webkit-tap-highlight-color: transparent;
 }
 
+.btn-controle:focus {
+    outline: none;
+}
+
+/* Parado: alto-falante */
 .btn-controle::before {
     content: "";
     width: 14px;
     height: 14px;
     background: currentColor;
     clip-path: polygon(0 38%, 30% 38%, 55% 20%, 55% 80%, 30% 62%, 0 62%);
-    position: relative;
     transform: translateX(-2px);
 }
 
@@ -150,6 +156,7 @@ body {
     opacity: 0.7;
 }
 
+/* Tocando: só as duas barras de pause */
 .btn-controle.is-playing::before {
     width: 12px;
     height: 14px;
@@ -159,44 +166,24 @@ body {
 }
 
 .btn-controle.is-playing::after {
-    opacity: none;
+    display: none;
 }
 
+/* Mudo: alto-falante com risco */
 .btn-controle.is-muted::before {
-    width: 14px;
-    height: 14px;
-    background: currentColor;
-    clip-path: polygon(0 38%, 30% 38%, 55% 20%, 55% 80%, 30% 62%, 0 62%);
     opacity: 0.7;
 }
 
 .btn-controle.is-muted::after {
-    content: "";
-    position: absolute;
     width: 2px;
     height: 18px;
     background: currentColor;
-    border-radius: 2px;
-    transform: rotate(-45deg);
-    right: 15px;
-    top: 13px;
-    opacity: 0.9;
     border: 0;
-}
-
-/* Barra de Volume Escondida por Padrão */
-.volume-slider {
-    width: 0;
-    opacity: 0;
-    transition: width 0.3s ease, opacity 0.3s ease;
-    cursor: pointer;
-    accent-color: var(--progress-fill); /* Usa a cor do seu tema na barra */
-}
-
-/* Mostra a barra de volume ao passar o mouse no container */
-.volume-container:hover .volume-slider {
-    width: 80px;
-    opacity: 1;
+    border-radius: 2px;
+    right: 21px;
+    top: 13px;
+    transform: rotate(-45deg);
+    opacity: 0.9;
 }
 
 /* Estilo do Card Central */
