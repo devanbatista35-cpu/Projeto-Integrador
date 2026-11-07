@@ -1,7 +1,7 @@
 /* ==========================================================================
    CONFIGURAÇÃO
    ========================================================================== */
-// Endereço da API (server.js). Se o front for servido pelo mesmo servidor, use '/api'.
+
 const API_URL = ['localhost', '127.0.0.1'].includes(location.hostname)
     ? 'http://localhost:3000/api'
     : 'https://bug-or-fact-api.onrender.com/api';
@@ -131,14 +131,11 @@ function loadQuestion() {
     renderDots();
 }
 
-// Monta o texto de feedback: resposta certa + fonte (bibliografia) se existir
-// Monta o texto de feedback: resposta certa + curiosidade + fonte (bibliografia) se existir
-// Monta o feedback: curiosidade + fonte (bibliografia) se existir
 function renderFeedbackDescription(q) {
     const feedbackDesc = document.getElementById('feedback-desc');
-    feedbackDesc.replaceChildren(); // limpa o conteúdo anterior (e o texto padrão do HTML)
+    feedbackDesc.replaceChildren(); 
 
-    // Curiosidade (acima da fonte)
+    // Curiosidade
     if (q.curiosity) {
         const box = document.createElement('div');
         box.className = 'feedback-curiosidade';
@@ -296,19 +293,16 @@ function toggleReferences() {
     if (title.innerText === 'Sobre') {
         title.innerText = 'Referências';
         content.innerHTML = `<strong>Referências</strong><br><br>
-        AHMED, M.; MAHMOOD, A. N.; HU, J. A survey of network anomaly detection techniques. <strong><em>Journal of Network and Computer Applications</em></strong>, v. 60, p. 19–31, 2016.<br><br>
-        BISHOP, C. M. <strong><em>Pattern Recognition and Machine Learning</em></strong>. New York: Springer, 2006.<br><br>
-        DOMINGOS, P. A few useful things to know about machine learning. <strong><em>Communications of the ACM</em></strong>, v. 55, n. 10, p. 78–87, 2012.<br><br>
-        GAMA, J. et al. A survey on concept drift adaptation. <strong><em>ACM Computing Surveys (CSUR)</em></strong>, v. 46, n. 4, p. 1–37, 2014.<br><br>
-        GOMEZ-URIBE, C. A.; HUNT, N. The Netflix recommender system: algorithms, business value, and innovation. <strong><em>ACM Transactions on Management Information Systems (TMIS)</em></strong>, v. 6, n. 4, p. 1–19, 2015.<br><br>
-        GOODFELLOW, I.; BENGIO, Y.; COURVILLE, A. <strong><em>Deep Learning</em></strong>. Cambridge: MIT Press, 2016.<br><br>
-        HASTIE, T.; TIBSHIRANI, R.; FRIEDMAN, J. <strong><em>The Elements of Statistical Learning: Data Mining, Inference, and Prediction</em></strong>. 2. ed. New York: Springer, 2009.<br><br>
-        HAWKINS, D. M. The problem of overfitting. <strong><em>Journal of Chemical Information and Computer Sciences</em></strong>, v. 44, n. 1, p. 1–12, 2004.<br><br>`;
+        <strong>Oracle</strong> — <a href="https://www.oracle.com/br/analytics/what-is-machine-learning-for-analytics/" target="_blank" rel="noopener noreferrer">O que é machine learning para análises?</a><br><br>
+        <strong>Oracle</strong> — <a href="https://blogs.oracle.com/oracle-brasil/diferena-entre-ia-automao-e-machine-learning" target="_blank" rel="noopener noreferrer">Diferença entre IA, automação e machine learning</a><br><br>
+        <strong>Oracle</strong> — <a href="https://docs.oracle.com/en/database/oracle/machine-learning/oml4sql/23/dmcon/what-is-machine-learning.html" target="_blank" rel="noopener noreferrer">O que é machine learning? (documentação)</a><br><br>
+        <strong>IBM</strong> — <a href="https://www.ibm.com/br-pt/think/topics/artificial-intelligence" target="_blank" rel="noopener noreferrer">O que é inteligência artificial (IA)?</a><br><br>
+        <strong>IBM</strong> — <a href="https://www.ibm.com/br-pt/think/topics/decision-trees" target="_blank" rel="noopener noreferrer">O que é uma árvore de decisão?</a><br><br>
+        <strong>IBM</strong> — <a href="https://www.ibm.com/think/topics/history-of-artificial-intelligence" target="_blank" rel="noopener noreferrer">The History of Artificial Intelligence</a>`;
         btn.innerText = 'Sobre';
     } else {
         title.innerText = 'Sobre';
         content.innerHTML = `<strong>Bug or Fact</strong> é um jogo de perguntas em que o jogador decide se cada afirmação é um <em>fato</em> (verdadeiro) ou um <em>bug</em> (falso). As perguntas abordam conceitos, funcionalidades e a história do <strong>Machine Learning</strong>.<br><br>
-        Projeto integrador da Graduação em Ciência da computação, no ano de 2026.<br><br>
         <div style="text-align: left;"><strong>Desenvolvedores<br>
         Gustavo Sacomani Rafael<br>
         Vanessa Vieira dos Santos<br>
@@ -331,7 +325,6 @@ document.addEventListener('DOMContentLoaded', () => {
         musica.volume = volumeControl.value;
     }
 
-    // Atualiza o visual do botão pelas classes do CSS (sem emoji)
     function atualizarIconeMusica() {
         btnMusica.classList.toggle('is-muted', Number(musica.volume) === 0);
         btnMusica.classList.toggle('is-playing', !musica.paused && Number(musica.volume) !== 0);

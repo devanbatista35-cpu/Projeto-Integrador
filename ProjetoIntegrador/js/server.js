@@ -25,7 +25,7 @@ app.get('/api/perguntas', asyncHandler(async (req, res) => {
   res.json(await db.buscarPerguntas(limite));
 }));
 
-// POST /api/jogadores  { nome, email }
+// POST /api/jogadores
 app.post('/api/jogadores', asyncHandler(async (req, res) => {
   const nome = String(req.body.nome ?? '').trim();
   const email = String(req.body.email ?? '').trim().toLowerCase();
@@ -40,7 +40,7 @@ app.post('/api/jogadores', asyncHandler(async (req, res) => {
   res.status(201).json(await db.salvarJogador(nome, email));
 }));
 
-// POST /api/partidas  { jogador_id, acertos, erros }  (pontuação = acertos x 10)
+// POST /api/partidas
 app.post('/api/partidas', asyncHandler(async (req, res) => {
   const jogadorId = Number(req.body.jogador_id);
   const acertos = Number(req.body.acertos);
@@ -73,7 +73,6 @@ app.get('/api/ranking', asyncHandler(async (req, res) => {
 
 app.use((_req, res) => res.status(404).json({ erro: 'Rota não encontrada.' }));
 
-// eslint-disable-next-line no-unused-vars
 app.use((err, _req, res, _next) => {
   if (err.type === 'entity.parse.failed') {
     return res.status(400).json({ erro: 'JSON inválido.' });
