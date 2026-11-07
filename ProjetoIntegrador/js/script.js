@@ -49,7 +49,12 @@ const apiLoadRanking = (limite = 10) => api(`/ranking?limite=${limite}`);
 function navigateTo(screenId) {
     document.querySelectorAll('.screen').forEach(screen => screen.classList.remove('active'));
     document.getElementById(screenId).classList.add('active');
+
+    const shouldShowControls = screenId === 'screen-register';
+    document.body.classList.toggle('controls-visible', shouldShowControls);
 }
+
+document.body.classList.toggle('controls-visible', document.getElementById('screen-register')?.classList.contains('active'));
 
 const themeToggleBtn = document.getElementById('themeToggleBtn');
 if (themeToggleBtn) {

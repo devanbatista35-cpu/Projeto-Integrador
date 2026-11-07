@@ -94,6 +94,18 @@ body {
     z-index: 100;
 }
 
+@media (max-width: 480px) {
+    .theme-toggle-btn,
+    .volume-container {
+        display: none;
+    }
+
+    body.controls-visible .theme-toggle-btn,
+    body.controls-visible .volume-container {
+        display: flex;
+    }
+}
+
 /* Botão de Controle de Música */
 .btn-controle {
     width: 45px;
@@ -102,7 +114,7 @@ body {
     border: none;
     cursor: pointer;
     background-color: #d4d0b8;
-    color: var(--btn-text);
+    color: rgba(35, 35, 35, 0.8);
     box-shadow: 2px 4px 10px rgba(0,0,0,0.3);
     display: flex;
     align-items: center;
@@ -114,39 +126,62 @@ body {
 
 .btn-controle::before {
     content: "";
-    width: 0;
-    height: 0;
-    margin-left: 3px;
-    border-top: 8px solid transparent;
-    border-bottom: 8px solid transparent;
-    border-left: 12px solid currentColor;
+    width: 14px;
+    height: 14px;
+    background: currentColor;
+    clip-path: polygon(0 38%, 30% 38%, 55% 20%, 55% 80%, 30% 62%, 0 62%);
+    position: relative;
+    transform: translateX(-2px);
+}
+
+.btn-controle::after {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border: 2px solid currentColor;
+    border-left: 0;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    border-radius: 0 12px 12px 0;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.7;
 }
 
 .btn-controle.is-playing::before {
     width: 12px;
     height: 14px;
-    margin-left: 0;
-    border: 0;
     background: linear-gradient(to right, currentColor 0 4px, transparent 4px 8px, currentColor 8px 12px);
+    clip-path: none;
+    transform: none;
+}
+
+.btn-controle.is-playing::after {
+    opacity: 0.35;
 }
 
 .btn-controle.is-muted::before {
-    width: 16px;
-    height: 16px;
-    margin-left: 0;
-    border: 0;
+    width: 14px;
+    height: 14px;
     background: currentColor;
-    clip-path: polygon(0 35%, 35% 35%, 75% 0, 75% 100%, 35% 65%, 0 65%);
+    clip-path: polygon(0 38%, 30% 38%, 55% 20%, 55% 80%, 30% 62%, 0 62%);
+    opacity: 0.7;
 }
 
 .btn-controle.is-muted::after {
     content: "";
     position: absolute;
     width: 2px;
-    height: 20px;
-    border-radius: 2px;
+    height: 18px;
     background: currentColor;
+    border-radius: 2px;
     transform: rotate(-45deg);
+    right: 15px;
+    top: 13px;
+    opacity: 0.9;
+    border: 0;
 }
 
 /* Barra de Volume Escondida por Padrão */
