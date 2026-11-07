@@ -128,14 +128,12 @@ function loadQuestion() {
 
 // Monta o texto de feedback: resposta certa + fonte (bibliografia) se existir
 // Monta o texto de feedback: resposta certa + curiosidade + fonte (bibliografia) se existir
+// Monta o feedback: curiosidade + fonte (bibliografia) se existir
 function renderFeedbackDescription(q) {
     const feedbackDesc = document.getElementById('feedback-desc');
-    //feedbackDesc.textContent = `A resposta correta é: ${q.correct ? 'Verdadeiro' : 'Falso'}.`;
+    feedbackDesc.replaceChildren(); // limpa o conteúdo anterior (e o texto padrão do HTML)
 
-    //if (q.explanation) {
-    //    feedbackDesc.textContent += ` ${q.explanation}`;
-    //}
-
+    // Curiosidade (acima da fonte)
     if (q.curiosity) {
         const box = document.createElement('div');
         box.className = 'feedback-curiosidade';
@@ -148,9 +146,10 @@ function renderFeedbackDescription(q) {
         feedbackDesc.appendChild(box);
     }
 
+    // Fonte
     if (q.source_title) {
-        feedbackDesc.appendChild(document.createElement('br'));
-        feedbackDesc.appendChild(document.createTextNode('Fonte: '));
+        const fonte = document.createElement('div');
+        fonte.appendChild(document.createTextNode('Fonte: '));
 
         if (q.source_url && /^https?:\/\//i.test(q.source_url)) {
             const link = document.createElement('a');
@@ -158,10 +157,12 @@ function renderFeedbackDescription(q) {
             link.target = '_blank';
             link.rel = 'noopener noreferrer';
             link.textContent = q.source_title;
-            feedbackDesc.appendChild(link);
+            fonte.appendChild(link);
         } else {
-            feedbackDesc.appendChild(document.createTextNode(q.source_title));
+            fonte.appendChild(document.createTextNode(q.source_title));
         }
+
+        feedbackDesc.appendChild(fonte);
     }
 }
 
