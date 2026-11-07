@@ -303,12 +303,12 @@ function toggleReferences() {
     } else {
         title.innerText = 'Sobre';
         content.innerHTML = `<strong>Bug or Fact</strong> é um jogo de perguntas em que o jogador decide se cada afirmação é um <em>fato</em> (verdadeiro) ou um <em>bug</em> (falso). As perguntas abordam conceitos, funcionalidades e a história do <strong>Machine Learning</strong>.<br><br>
-        <div style="text-align: left;"><strong>Desenvolvedores<br>
+        <div style="text-align: left;"><strong style="color: var(--title-color);">Desenvolvedores</strong><br><br><strong>
         Gustavo Sacomani Rafael<br>
-        Vanessa Vieira dos Santos<br>
+        Vanessa Batista de Freitas<br>
         João Pedro Camargo de Souza<br>
         Pamela Nunes de Campos<br>
-        Henrique de Oliveira Granso<br></strong></div>`;
+        Henrique de Oliveira Granso</strong></div>`;
         btn.innerText = 'Referências';
     }
 }
