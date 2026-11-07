@@ -132,9 +132,9 @@ function renderFeedbackDescription(q) {
     const feedbackDesc = document.getElementById('feedback-desc');
     //feedbackDesc.textContent = `A resposta correta é: ${q.correct ? 'Verdadeiro' : 'Falso'}.`;
 
-    if (q.explanation) {
-        feedbackDesc.textContent += ` ${q.explanation}`;
-    }
+    //if (q.explanation) {
+    //    feedbackDesc.textContent += ` ${q.explanation}`;
+    //}
 
     if (q.curiosity) {
         const box = document.createElement('div');
