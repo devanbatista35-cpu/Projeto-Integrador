@@ -295,18 +295,38 @@ function toggleReferences() {
 
     if (title.innerText === 'Sobre') {
         title.innerText = 'Referências';
-        content.innerHTML = '<br><br><strong>sites e outros</strong><br><br>';
+        content.innerHTML = `<strong>Referências</strong><br><br>
+        AHMED, M.; MAHMOOD, A. N.; HU, J. A survey of network anomaly detection techniques. <strong><em>Journal of Network and Computer Applications</em></strong>, v. 60, p. 19–31, 2016.<br><br>
+        BISHOP, C. M. <strong><em>Pattern Recognition and Machine Learning</em></strong>. New York: Springer, 2006.<br><br>
+        DOMINGOS, P. A few useful things to know about machine learning. <strong><em>Communications of the ACM</em></strong>, v. 55, n. 10, p. 78–87, 2012.<br><br>
+        GAMA, J. et al. A survey on concept drift adaptation. <strong><em>ACM Computing Surveys (CSUR)</em></strong>, v. 46, n. 4, p. 1–37, 2014.<br><br>
+        GOMEZ-URIBE, C. A.; HUNT, N. The Netflix recommender system: algorithms, business value, and innovation. <strong><em>ACM Transactions on Management Information Systems (TMIS)</em></strong>, v. 6, n. 4, p. 1–19, 2015.<br><br>
+        GOODFELLOW, I.; BENGIO, Y.; COURVILLE, A. <strong><em>Deep Learning</em></strong>. Cambridge: MIT Press, 2016.<br><br>
+        HASTIE, T.; TIBSHIRANI, R.; FRIEDMAN, J. <strong><em>The Elements of Statistical Learning: Data Mining, Inference, and Prediction</em></strong>. 2. ed. New York: Springer, 2009.<br><br>
+        HAWKINS, D. M. The problem of overfitting. <strong><em>Journal of Chemical Information and Computer Sciences</em></strong>, v. 44, n. 1, p. 1–12, 2004.<br><br>
+        KILKENNY, M. F.; ROBINSON, K. M. Data quality: "Garbage in, garbage out". <strong><em>Health Information Management Journal</em></strong>, v. 47, n. 3, p. 103–105, 2018.<br><br>
+        KOHAVI, R. A study of cross-validation and bootstrap for accuracy estimation and model selection. In: INTERNATIONAL JOINT CONFERENCE ON ARTIFICIAL INTELLIGENCE, 14., 1995, Montreal. <strong><em>Proceedings...</em></strong> San Mateo: Morgan Kaufmann, 1995. v. 2, p. 1137–1143.<br><br>
+        LECUN, Y.; BENGIO, Y.; HINTON, G. Deep learning. <strong><em>Nature</em></strong>, v. 521, n. 7553, p. 436–444, 2015.<br><br>
+        MCCARTHY, J. In Memoriam: Arthur Samuel (1901–1990). <strong><em>AI Magazine</em></strong>, v. 11, n. 3, p. 10, 1990.<br><br>
+        MCCULLOCH, W. S.; PITTS, W. A logical calculus of the ideas immanent in nervous activity. <strong><em>The Bulletin of Mathematical Biophysics</em></strong>, v. 5, n. 4, p. 115–133, 1943.<br><br>
+        MITCHELL, T. M. <strong><em>Machine Learning</em></strong>. New York: McGraw-Hill Education, 1997.<br><br>
+        PRESS, G. <strong><em>Cleaning Big Data: Most Time-Consuming, Least Enjoyable Data Science Task, Survey Says</em></strong>. Forbes, 2016. Disponível em: <a href="https://www.forbes.com" target="_blank" rel="noopener noreferrer">https://www.forbes.com</a>. Acesso em: 7 nov. 2026.<br><br>
+        PROVOST, F.; FAWCETT, T. <strong><em>Data Science for Business: What You Need to Know about Data Mining and Data-Analytic Thinking</em></strong>. Sebastopol: O'Reilly Media, 2013.<br><br>
+        ROSENBLATT, F. The perceptron: a probabilistic model for information storage and organization in the brain. <strong><em>Psychological Review</em></strong>, v. 65, n. 6, p. 386–408, 1958.<br><br>
+        RUSSELL, S.; NORVIG, P. <strong><em>Artificial Intelligence: A Modern Approach</em></strong>. 4. ed. Hoboken: Pearson, 2020.<br><br>
+        SAMUEL, A. L. Some studies in machine learning using the game of checkers. <strong><em>IBM Journal of Research and Development</em></strong>, v. 3, n. 3, p. 210–229, 1959.<br><br>
+        ZHENG, A.; CASARI, A. <strong><em>Feature Engineering for Machine Learning: Principles and Techniques for Data Developers</em></strong>. Sebastopol: O'Reilly Media, 2018.`;
         btn.innerText = 'Sobre';
     } else {
         title.innerText = 'Sobre';
-        content.innerHTML = `Esse jogo foi desenvolvido juntando conhecimentos técnicos sobre HTML, JavaScript e Banco de Dados.<br><br>
+        content.innerHTML = `<strong>Bug or Fact</strong> é um jogo de perguntas em que o jogador decide se cada afirmação é um <em>fato</em> (verdadeiro) ou um <em>bug</em> (falso). As perguntas abordam conceitos, funcionalidades e a história do <strong>Machine Learning</strong>.<br><br>
         Projeto integrador da Graduação em Ciência da computação, no ano de 2026.<br><br>
-        <strong>Desenvolvedores<br>
+        <div style="text-align: left;"><strong>Desenvolvedores<br>
         Gustavo Sacomani Rafael<br>
         Vanessa Vieira dos Santos<br>
         João Pedro Camargo de Souza<br>
         Pamela Nunes de Campos<br>
-        Henrique de Oliveira Granso<br></strong>`;
+        Henrique de Oliveira Granso<br></strong></div>`;
         btn.innerText = 'Referências';
     }
 }

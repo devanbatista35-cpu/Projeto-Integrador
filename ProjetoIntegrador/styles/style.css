@@ -94,6 +94,18 @@ body {
     z-index: 100;
 }
 
+@media (hover: hover) and (pointer: fine) {
+    .volume-container {
+        opacity: 0;
+        transition: opacity 0.2s ease;
+    }
+
+    .volume-container:hover,
+    .volume-container:focus-within {
+        opacity: 1;
+    }
+}
+
 @media (max-width: 480px) {
     .theme-toggle-btn,
     .volume-container {
