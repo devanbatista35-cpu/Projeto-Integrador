@@ -323,17 +323,23 @@ document.addEventListener('DOMContentLoaded', () => {
         musica.volume = volumeControl.value;
     }
 
+    // Atualiza o visual do botão pelas classes do CSS (sem emoji)
+    function atualizarIconeMusica() {
+        btnMusica.classList.toggle('is-muted', Number(musica.volume) === 0);
+        btnMusica.classList.toggle('is-playing', !musica.paused && Number(musica.volume) !== 0);
+    }
+
     if (btnMusica && musica) {
         btnMusica.addEventListener('click', (e) => {
             e.stopPropagation();
 
             if (musica.paused) {
                 musica.play()
-                    .then(() => { btnMusica.textContent = '⏸️'; })
+                    .then(atualizarIconeMusica)
                     .catch(error => console.error('Erro ao tocar a música:', error));
             } else {
                 musica.pause();
-                btnMusica.textContent = '🎵';
+                atualizarIconeMusica();
             }
         });
     }
@@ -341,12 +347,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (volumeControl && musica && btnMusica) {
         volumeControl.addEventListener('input', (e) => {
             musica.volume = e.target.value;
-
-            if (Number(musica.volume) === 0) {
-                btnMusica.textContent = '🔇';
-            } else {
-                btnMusica.textContent = musica.paused ? '🎵' : '⏸️';
-            }
+            atualizarIconeMusica();
         });
     }
 });
