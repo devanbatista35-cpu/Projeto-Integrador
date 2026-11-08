@@ -340,7 +340,3 @@ Projeto desenvolvido por estudantes de Ciência da Computação:
 - Henrique de Oliveira Granso
 
 ---
-
-## 📄 Licença
-
-Distribuído sob a licença descrita no arquivo [LICENSE](LICENSE).
