@@ -1,15 +1,15 @@
 # 🐛 Bug or Fact
 
-> Quiz de **Verdadeiro ou Falso** sobre tecnologia e Machine Learning, com cadastro de jogadores, feedback com fonte bibliográfica e ranking global. Aplicação full stack com banco de dados na nuvem.
+> Quiz de **Verdadeiro ou Falso** sobre Machine Learning, com cadastro de jogadores, feedback com curiosidade e fonte bibliográfica, página de referências e ranking global. Aplicação full stack com banco de dados na nuvem.
 
 ![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?logo=node.js&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-4-000000?logo=express&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Supabase-3ECF8E?logo=supabase&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6%2B-F7DF1E?logo=javascript&logoColor=black)
-![Netlify](https://img.shields.io/badge/Front--end-Netlify-00C7B7?logo=netlify&logoColor=white)
+![Vercel](https://img.shields.io/badge/Front--end-Vercel-000000?logo=vercel&logoColor=white)
 ![Render](https://img.shields.io/badge/API-Render-46E3B7?logo=render&logoColor=black)
 
-**🎮 Jogar agora:** [bug-or-fact.netlify.app](https://bug-or-fact.netlify.app)
+**🎮 Jogar agora:** [bug-or-fact.vercel.app](https://bug-or-fact.vercel.app)
 **🔌 API:** [bug-or-fact-api.onrender.com/api/health](https://bug-or-fact-api.onrender.com/api/health)
 
 > ⏳ A API está hospedada no plano gratuito do Render e "hiberna" após um período sem uso. A primeira requisição pode levar até ~50 segundos para responder.
@@ -38,7 +38,7 @@
 
 **Bug or Fact** é um jogo de perguntas em que o jogador decide se cada afirmação é um *fato* (verdadeiro) ou um *bug* (falso). As perguntas abordam conceitos, funcionalidades e a história do **Machine Learning**.
 
-Cada partida sorteia 10 perguntas ativas do banco de dados. Ao responder, o jogador recebe o feedback imediato com a resposta correta e a **fonte bibliográfica** do conteúdo. Ao final, a melhor pontuação de cada jogador entra no ranking.
+Cada partida sorteia 10 perguntas ativas do banco de dados. Ao responder, o jogador recebe o feedback imediato, com uma **curiosidade** sobre o tema e a **fonte bibliográfica** do conteúdo. Ao final, a melhor pontuação de cada jogador entra no ranking.
 
 O projeto foi desenvolvido como **Projeto Integrador** do curso de Graduação em Ciência da Computação (2026), integrando front-end, back-end, modelagem de banco de dados e publicação em nuvem.
 
@@ -48,7 +48,10 @@ O projeto foi desenvolvido como **Projeto Integrador** do curso de Graduação e
 
 - 👤 **Cadastro de jogador** com nome e e-mail (o e-mail identifica o jogador; reentradas atualizam o nome).
 - 🎲 **Perguntas aleatórias** a cada partida, sorteadas entre as publicações ativas.
-- ✅ **Feedback imediato** com a resposta correta e link para a fonte bibliográfica.
+- ✅ **Feedback imediato** indicando se a resposta estava certa ou errada.
+- 💡 **Curiosidade** exibida em destaque, acima da fonte, quando cadastrada para a pergunta.
+- 🔗 **Fonte bibliográfica** com link para o material de apoio.
+- 📚 **Página de Referências** gerada automaticamente a partir do banco, sem fontes repetidas.
 - 🏆 **Ranking global** que guarda apenas a **melhor pontuação** de cada jogador, com desempate pela data.
 - 📊 **Resumo da partida**: pontuação, acertos, erros e total de perguntas.
 - 🚪 **Saída com confirmação** durante a partida.
@@ -65,7 +68,7 @@ O projeto foi desenvolvido como **Projeto Integrador** do curso de Graduação e
 | **Front-end** | HTML5, CSS3, JavaScript (ES6+, `fetch`, manipulação do DOM) |
 | **Back-end** | Node.js, Express, `cors`, `dotenv` |
 | **Banco de dados** | PostgreSQL (Supabase), driver `pg` com pool de conexões |
-| **Hospedagem** | Netlify (front-end), Render (API), Supabase (banco) |
+| **Hospedagem** | Vercel (front-end), Render (API), Supabase (banco) |
 | **Versionamento** | Git e GitHub |
 
 ---
@@ -73,10 +76,10 @@ O projeto foi desenvolvido como **Projeto Integrador** do curso de Graduação e
 ## 🏗 Arquitetura
 
 ```
-┌──────────────┐   HTTPS / JSON   ┌──────────────────┐    SSL    ┌─────────────────┐
+┌──────────────┐   HTTPS / JSON   ┌───────────────────┐    SSL    ┌─────────────────┐
 │  Navegador   │ ───────────────▶ │  API Node/Express │ ────────▶ │  PostgreSQL     │
-│  (Netlify)   │ ◀─────────────── │  (Render)         │ ◀──────── │  (Supabase)     │
-└──────────────┘                  └──────────────────┘           └─────────────────┘
+│  (Vercel)    │ ◀─────────────── │  (Render)         │ ◀──────── │  (Supabase)     │
+└──────────────┘                  └───────────────────┘           └─────────────────┘
    HTML / CSS / JS                  server.js + queries.js            7 tabelas + RLS
 ```
 
@@ -113,7 +116,7 @@ O banco possui **7 tabelas** relacionais. O script completo, com os dados inicia
 | `Perguntas` | Enunciados das afirmações |
 | `Alternativas` | Opções `TRUE`/`FALSE`, com marcação da correta |
 | `Publicacoes` | Controla se uma pergunta está `Ativo` ou `Inativo` |
-| `Bibliografias` | Fonte e link de cada pergunta |
+| `Bibliografias` | Fonte, link e curiosidade de cada pergunta |
 | `Jogador` | Nome e e-mail (único) dos jogadores |
 | `Classificacao` | Melhor pontuação de cada jogador (ranking) |
 
@@ -134,6 +137,7 @@ Base URL: `https://bug-or-fact-api.onrender.com/api`
 |--------|------|-----------|
 | `GET` | `/health` | Verifica se a API e o banco estão no ar |
 | `GET` | `/perguntas?limite=10` | Retorna perguntas ativas em ordem aleatória (1 a 50) |
+| `GET` | `/referencias` | Retorna as fontes bibliográficas, sem repetição |
 | `POST` | `/jogadores` | Cria o jogador ou atualiza o nome se o e-mail já existir |
 | `POST` | `/partidas` | Registra a partida; guarda só a melhor pontuação |
 | `GET` | `/ranking?limite=10` | Retorna o ranking (1 a 100) |
@@ -148,8 +152,18 @@ Base URL: `https://bug-or-fact-api.onrender.com/api`
     "statement": "O criador do Machine Learning foi Arthur Lee Samuel?",
     "correct": true,
     "source_title": "Oracle - Dados e Performance",
-    "source_url": "https://www.oracle.com"
+    "source_url": "https://www.oracle.com",
+    "curiosity": "O termo Machine Learning foi cunhado por Arthur Samuel em 1959."
   }
+]
+```
+O campo `curiosity` vem como `null` quando a pergunta não tem curiosidade cadastrada.
+
+**`GET /referencias`**
+```json
+[
+  { "title": "IBM - Topics", "url": "https://www.ibm.com" },
+  { "title": "Oracle - Machine Learning", "url": "https://www.oracle.com" }
 ]
 ```
 
@@ -201,7 +215,7 @@ cd Projeto-Integrador/ProjetoIntegrador
 
 **2. Crie o banco no Supabase**
 
-No painel do projeto, abra **SQL Editor**, cole o conteúdo de `doc_date/banco_supabase.sql` e execute. A consulta final deve listar 20 linhas.
+No painel do projeto, abra **SQL Editor**, cole o conteúdo de `doc_date/banco_supabase.sql` e execute. A consulta final deve listar 20 linhas. Depois, adicione a coluna de curiosidades (veja [Coluna de curiosidades](#coluna-de-curiosidades)).
 
 **3. Configure as variáveis de ambiente**
 
@@ -232,9 +246,17 @@ Abra o `index.html` com a extensão **Live Server** do VS Code. Em `localhost`, 
 |---------|-----------|--------------|
 | Banco de dados | Supabase | Script SQL executado no SQL Editor |
 | API | Render | Root Directory `ProjetoIntegrador`, build `npm install`, start `npm start`, variáveis `DATABASE_URL` e `CORS_ORIGIN` |
-| Front-end | Netlify | Publish directory `ProjetoIntegrador`, sem build command |
+| Front-end | Vercel | Root Directory `ProjetoIntegrador`, preset **Other**, sem build command |
 
-Ambos os serviços fazem **deploy contínuo**: cada `push` na branch `main` publica a nova versão automaticamente.
+Os dois serviços fazem **deploy contínuo**: cada `push` na branch `main` publica a nova versão automaticamente.
+
+Em produção, defina `CORS_ORIGIN` no Render com o endereço exato do front-end, sem barra no final:
+
+```
+https://bug-or-fact.vercel.app
+```
+
+> 💡 O front-end já esteve hospedado na Netlify. A migração para a Vercel foi feita porque os builds da Netlify foram pausados ao esgotar os créditos do plano gratuito. Como o front-end é estático, a troca não exigiu mudanças no código.
 
 ---
 
@@ -244,12 +266,13 @@ Ambos os serviços fazem **deploy contínuo**: cada `push` na branch `main` publ
 - **Validação de entrada** no servidor: tamanho do nome, formato do e-mail, inteiros válidos e limites de quantidade.
 - **Pontuação calculada no servidor** (acertos × 10). O cliente envia apenas acertos e erros, o que reduz a chance de adulteração do placar.
 - **Melhor pontuação por jogador** via `INSERT ... ON CONFLICT DO UPDATE` com `GREATEST`.
-- **Prevenção de XSS** no front-end: dados da API são inseridos com `textContent`, e links externos são validados (`http/https`) e abertos com `rel="noopener noreferrer"`.
+- **Prevenção de XSS** no front-end: dados da API (incluindo curiosidades e referências) são inseridos com `textContent` e `createTextNode`, e links externos são validados (`http/https`) e abertos com `rel="noopener noreferrer"`.
 - **CORS restrito** ao domínio do front-end em produção.
 - **Segredos fora do código**: credenciais em variáveis de ambiente, com `.env` no `.gitignore`.
 - **RLS ativo** no Supabase, de modo que a API pública do serviço não expõe os dados.
 - **Tratamento centralizado de erros** com `asyncHandler` e middleware dedicado.
 - **Limite de tamanho do corpo** das requisições (`10kb`).
+- **Referências sem repetição** geradas no banco com `DISTINCT ON`, evitando listas duplicadas na interface.
 
 ---
 
@@ -262,7 +285,8 @@ Ambos os serviços fazem **deploy contínuo**: cada `push` na branch `main` publ
 
 ### Banco de dados
 - **Modelagem relacional** com chaves primárias e estrangeiras, restrições `CHECK` e `UNIQUE`.
-- **SQL avançado**: `JOIN`, `LEFT JOIN LATERAL`, subconsultas com `EXISTS`, `ORDER BY RANDOM()`, `ON CONFLICT` (*upsert*) e funções como `GREATEST`.
+- **SQL avançado**: `JOIN`, `LEFT JOIN LATERAL`, subconsultas com `EXISTS`, `DISTINCT ON`, `ORDER BY RANDOM()`, `ON CONFLICT` (*upsert*) e funções como `GREATEST`.
+- **Evolução do esquema** com `ALTER TABLE`, adicionando a coluna de curiosidades sem perder dados.
 - Uso de **pool de conexões** e **SSL** com PostgreSQL em nuvem.
 - Aplicação de **Row Level Security (RLS)**.
 
@@ -270,6 +294,7 @@ Ambos os serviços fazem **deploy contínuo**: cada `push` na branch `main` publ
 - Desenvolvimento de uma **SPA** em JavaScript puro, com troca de telas e gerenciamento de estado.
 - Consumo de API com **`fetch`**, tratamento de erros e estados de carregamento.
 - Manipulação segura do **DOM** e controle de **áudio**.
+- Ícones de controle desenhados em **CSS puro**, sem depender de emojis do sistema.
 - Interface com **tema claro/escuro** e layout responsivo.
 
 ### Segurança
@@ -278,9 +303,10 @@ Ambos os serviços fazem **deploy contínuo**: cada `push` na branch `main` publ
 - Gestão de segredos e resposta a exposição de credenciais (rotação de senha).
 
 ### DevOps e entrega
-- **Deploy em nuvem** de uma aplicação em três camadas (Supabase, Render e Netlify).
+- **Deploy em nuvem** de uma aplicação em três camadas (Supabase, Render e Vercel).
 - **CI/CD** simples com deploy automático a cada `push`.
 - Configuração de **ambientes** (desenvolvimento e produção) com URLs de API distintas.
+- **Migração de hospedagem** do front-end (Netlify para Vercel) diante de limite de créditos, com ajuste de CORS.
 - Diagnóstico de problemas de infraestrutura: IPv4 vs IPv6 no pooler, PATH, políticas de execução e CORS.
 
 ### Versionamento e trabalho em equipe
@@ -292,7 +318,8 @@ Ambos os serviços fazem **deploy contínuo**: cada `push` na branch `main` publ
 
 ## 🔮 Melhorias futuras
 
-- [ ] Painel administrativo para cadastrar e ativar perguntas.
+- [ ] Painel administrativo para cadastrar e ativar perguntas, curiosidades e fontes.
+- [ ] Referências específicas por artigo (em vez da página inicial de cada site).
 - [ ] Mais categorias e níveis de dificuldade.
 - [ ] Autenticação de jogadores.
 - [ ] Cronômetro por pergunta.
